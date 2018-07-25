@@ -14,7 +14,7 @@ class BaseModel(models.Model):
 
 
 class Product(BaseModel):
-    name = models.CharField(max_length=128)  # name of the task
+    name = models.CharField(max_length=128)
     price = models.PositiveIntegerField(default=0)
 
     ZERO = "ze"
@@ -39,6 +39,7 @@ class Product(BaseModel):
 class Order(BaseModel):
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
     items = models.ManyToManyField(Product, through='ItemQuantity', blank=True)
+    currency = models.CharField(max_length=3, null=True, blank=True)
 
     @property
     def vat_total(self):
@@ -46,6 +47,11 @@ class Order(BaseModel):
         for item in self.items.all():
             quantity = item.itemquantity_set.get(order=self.id).quantity
             vat_total += item.vat * quantity
+        if self.currency:
+            rate = get_currency_rate("GBP", self.currency)
+            rate = rate.get("GBP" + "_" + self.currency)
+            vat_total = vat_total * rate
+            return round(vat_total)
         return round(vat_total)
 
     @property
@@ -54,15 +60,15 @@ class Order(BaseModel):
         for item in self.items.all():
             quantity = item.itemquantity_set.get(order=self.id).quantity
             total += item.price * quantity + item.vat * quantity
+        if self.currency:
+            rate = get_currency_rate("GBP", self.currency)
+            rate = rate.get("GBP" + "_" + self.currency)
+            total = total * rate
+            return round(total)
         return round(total)
 
-    def get_converted_order_total(self, user_currency="GBP", org_currency="GBP"):
-        if user_currency == org_currency:
-            return self.order_total
-        rate = get_currency_rate(org_currency, user_currency)
-        rate = rate.get(org_currency + "_" + user_currency)  # the format of the currency API
-        converted_order_total = round(rate * self.order_total)
-        return converted_order_total
+    # The amounts would change each time currecy fluxcuates.
+    # For (real world) production uses, these values should also be kept in the database.
 
     def __str__(self):
         return "Order # %i" % self.id
