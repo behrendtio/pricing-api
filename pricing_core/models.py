@@ -71,3 +71,6 @@ class ItemQuantity(BaseModel):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     item = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return "%s - %s x %s " % (self.order, self.item, self.quantity)
