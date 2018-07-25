@@ -31,7 +31,7 @@ For your convenience and to get you started quickly pretty fast, sqlite database
 
 ### Create a superuser
 
-You will need a superuser account to get you started.
+You will need a superuser account if you'd want to add new products and edit things in admin.
 
 ```
 python manage.py createsuperuser
