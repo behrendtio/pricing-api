@@ -14,9 +14,9 @@ class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
 
     def perform_create(self, serializer):
-        instance = serializer.save()
+        order = serializer.save()
         for item in self.request.data.get("items"):
-            instance.items.add(item["id"])
+            ItemQuantity.objects.create(item_id=item["id"], order=order, quantity=item["quantity"])
 
     @action(methods=['get'], detail=False)
     def calculate_currency_price(self, request):
