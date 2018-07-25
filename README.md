@@ -27,7 +27,7 @@ pip install -r requirements.txt
 ```
 
 ### The Products (Database)
-For your convenience and get you started quickly pretty fast, sqlite database with some products have been included (normally wouldn't) in this repo.
+For your convenience and to get you started quickly pretty fast, sqlite database with some products have been included (normally wouldn't) in this repo.
 
 ### Create a superuser
 
