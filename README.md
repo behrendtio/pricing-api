@@ -53,7 +53,7 @@ Go to the router page in the following URL. (Assuming you started your server wi
 http://127.0.0.1:8000/api/orders/
 ```
 Below the page, you will see a form. Click on the "Raw Data" tab. Paste your input JSON there.
-Sample inputs have been created for you.
+Sample inputs have been created for you at [sample input data](./pricing_core/input.json)
 
 This will create an order. ```order_total``` and ```vat_total``` will be calculated. Also, VAT for each item in the order will be displayed too.
 
