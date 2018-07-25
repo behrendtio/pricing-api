@@ -10,22 +10,25 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class ItemQuantitySerializer(serializers.ModelSerializer):
-    order = serializers.ReadOnlyField(source='*')
-    product = serializers.ReadOnlyField(source='*')  # passing all
-    #order = OrderSerializer(read_only=True)
-    #product = ProductSerializer(read_only=True)
+    id = serializers.ReadOnlyField(source="item.id")
+    vat = serializers.ReadOnlyField(source="item.vat")
+    price = serializers.ReadOnlyField(source="item.price")
+    #something = serializers.SerializerMethodField()
 
     class Meta:
         model = models.ItemQuantity
-        fields = ('quantity')
+        fields = ('id', 'quantity', 'price', 'vat')
+
+    # The method for something
+    def get_something(self, object):
+        return object.item.price * object.quantity
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    items = ProductSerializer(many=True, read_only=True)
-    quantity = ItemQuantitySerializer(source='*', read_only=True)
+    items = ItemQuantitySerializer(source="itemquantity_set", many=True, read_only=True)
 
-    #currency = (allow_null = True)
+    currency = serializers.ReadOnlyField(allow_null=True)
 
     class Meta:
-        fields = ('id', 'customer', 'items', 'quantity', 'order_total', 'vat_total')
+        fields = ('id', 'customer', 'items', 'order_total', 'vat_total', 'currency')
         model = models.Order
