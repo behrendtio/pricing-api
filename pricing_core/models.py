@@ -39,20 +39,20 @@ class Product(BaseModel):
 
 class Order(BaseModel):
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
-    items = models.ManyToManyField(Product, related_name="order_items", blank=True)
+    items = models.ManyToManyField(Product, through='ItemQuantity', blank=True)
 
     @property
     def vat_total(self):
         vat_total = 0
         for item in self.items.all():
-            vat_total += item.vat
+            vat_total += item.vat * item.quantity
         return round(vat_total)
 
     @property
     def order_total(self):
         total = 0
         for item in self.items.all():
-            total += item.price + item.vat
+            total += item.price * item.quantity + item.vat * item.quantity
         return round(total)
 
     def get_converted_order_total(self, user_currency="GBP", org_currency="GBP"):
@@ -65,3 +65,9 @@ class Order(BaseModel):
 
     def __str__(self):
         return "Order # %i" % self.id
+
+
+class ItemQuantity(BaseModel):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    item = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
