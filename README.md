@@ -58,8 +58,15 @@ Sample input have been created for you at [sample input data](./sample_input.jso
 This will create an order. ```order_total``` and ```vat_total``` will be calculated. Also, VAT for each item in the order will be displayed too.
 
 ## International Use Case (With Currency Conversion)
+All prices are in GBP. If we'd like to see the prices in different currency, we have to follow the steps below.
+
 For this use case, you will need to make the request from the shell.
-We will need to input an order ID and user's native currency to make it work.
+First run:
+```
+python manage.py shell
+```
+
+After the shell loads, we will need to input an order ID and user's native currency (3 letter code, eg: ISO 4217 code) in the payload to make this API work.
 
 ```
 import requests
@@ -83,7 +90,7 @@ r.json()
 
 ## Acknowledgments
 
-* I'm aware there are tons of improvements that can be made. It's a matter of time/energy and resources. Looking forward to discussing these with you. Here are my answers to few critical questions.
+* I'm aware there are tons of improvements that can be made. It's a matter of time/energy and resources. Looking forward to discussing these with you. I've briefly talked about those in the next section. Here are my answers to few critical questions.
 
 ## Critical Questions to Answer
 #### If you had more time, what improvements would you make if any?
