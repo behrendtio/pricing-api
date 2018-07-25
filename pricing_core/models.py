@@ -44,8 +44,8 @@ class Order(BaseModel):
     @property
     def vat_total(self):
         vat_total = 0
-        quantity = item.itemquantity_set.get(order=self.id).quantity
         for item in self.items.all():
+            quantity = item.itemquantity_set.get(order=self.id).quantity
             vat_total += item.vat * quantity
         return round(vat_total)
 
