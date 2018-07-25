@@ -20,11 +20,14 @@ source pricing-venv/bin/activate
 
 ### Installing Requirements
 
-Install the requirements.txt using pip install.
+Make sure you are in the main directory. Install the requirements.txt using pip install.
 
 ```
 pip install -r requirements.txt
 ```
+
+### The Products (Database)
+For your convenience and get you started quickly pretty fast, sqlite database with some products have been included (normally wouldn't) in this repo.
 
 ### Create a superuser
 
@@ -41,8 +44,7 @@ First run the server.
 python manage.py runserver
 ```
 
-## The Products (Database)
-For your convenience and get you started quickly pretty fast, sqlite database with some products have been included (normally wouldn't) in this repo.
+
 
 ## Simple Use Case
 
