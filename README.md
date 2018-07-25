@@ -65,12 +65,12 @@ A) Simple Approach
 B) Detailed Approach
 
 #### A) Simple Way
-Just pass the 3 letter currency code (ie. ISO 4217 code) with your request. See [sample input with currency data](./sample_input(currency).json) to get you started.
+Just pass the 3 letter currency code (ie. ISO 4217 code) with your request. See [sample input with currency data](./sample_input_currency.json) to get you started.
 
 You will see that ```order_total``` and ```vat_total``` will be calculated in the foreign currency. (Not the product prices and VAT)
 
 #### A) Detailed Way
-If you'd like to see the original prices alongside the currency converted you can go with this approach.
+If you'd like to see the original prices alongside the currency converted you can go with this approach. This is also handy in case you don't want to record the currency in the database (like lookup uses for several different currencies)
 
 For this use case, you will need to make the request from the shell.
 First run:
