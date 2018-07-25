@@ -70,7 +70,7 @@ Just pass the 3 letter currency code (ie. ISO 4217 code) with your request. See 
 You will see that ```order_total``` and ```vat_total``` will be calculated in the foreign currency. (Not the product prices and VAT)
 
 #### A) Detailed Way
-If you'd like to see the original prices alongside the currency converted you can go with this approach. This is also handy in case you don't want to record the currency in the database (like lookup uses for several different currencies)
+If you'd like to see the original prices alongside the currency converted you can go with this approach. This is also handy in case you don't want to record the currency in the database (like lookup uses for several different currencies) (or if you really really want to experiment with cross-currency parity of the conversion API :)
 
 For this use case, you will need to make the request from the shell.
 First run:
@@ -84,7 +84,7 @@ After the shell loads, we will need to input an order ID and user's native curre
 import requests
 import json
 headers = {'content-type': 'application/json'}
-payload = {"id":3, "user_currency": "GBP"}
+payload = {"id":3, "user_currency": "USD"}
 
 url = "http://127.0.0.1:8000/api/orders/calculate_currency_price/"
 r = requests.get(url, data=json.dumps(payload), headers=headers)
