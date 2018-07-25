@@ -51,10 +51,5 @@ def test_the_endpoint_creates_order(client, django_user_model):
     # checking if the same number of items were added to the order
     assert len(response_json["items"]) == len(payload["items"])
 
-
-# def get_logged_in_client(client, django_user_model):
-#     username = "user1"
-#     password = "pass1"
-#     user = django_user_model.objects.create_user(username=username, password=password)
-#     client.login(username=username, password=password)
-#     return client, user
+    assert response_json["order_total"] == 2250
+    assert response_json["vat_total"] == 0
