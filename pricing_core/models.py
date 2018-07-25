@@ -44,15 +44,17 @@ class Order(BaseModel):
     @property
     def vat_total(self):
         vat_total = 0
+        quantity = item.itemquantity_set.get(order=self.id).quantity
         for item in self.items.all():
-            vat_total += item.vat * item.quantity
+            vat_total += item.vat * quantity
         return round(vat_total)
 
     @property
     def order_total(self):
         total = 0
         for item in self.items.all():
-            total += item.price * item.quantity + item.vat * item.quantity
+            quantity = item.itemquantity_set.get(order=self.id).quantity
+            total += item.price * quantity + item.vat * quantity
         return round(total)
 
     def get_converted_order_total(self, user_currency="GBP", org_currency="GBP"):
