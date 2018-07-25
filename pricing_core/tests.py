@@ -7,7 +7,7 @@ from pricing_core.models import Order
 @pytest.mark.django_db(transaction=False)
 def test_requests():
     client = RequestsClient()
-    response = client.get('http://127.0.0.1:9000/api/orders/')
+    response = client.get('http://testserverapi/api/orders/')
     assert response.status_code == 200
 
 
@@ -20,7 +20,7 @@ def test_the_endpoint_creates_order(client, django_user_model):
     headers = {'content-type': 'application/json'}
     payload = {'customer': 3, 'items': [{'id': 3, 'quantity': 1}, {'id': 4, 'quantity': 2}]}
 
-    response = client.post("http://127.0.0.1:9000/api/orders/", data=json.dumps(payload), headers=headers)
+    response = client.post("http://testserverapi/api/orders/", data=json.dumps(payload), headers=headers)
 
     assert response.status_code == 201
     response_json = response.json()
