@@ -46,7 +46,7 @@ python manage.py runserver
 
 
 
-## Simple Use Case
+## Simple Use Case (GBP)
 
 Go to the router page in the following URL. (Assuming you started your server with port 8000)
 ```
@@ -60,13 +60,25 @@ This will create an order. ```order_total``` and ```vat_total``` will be calcula
 ## International Use Case (With Currency Conversion)
 All prices are in GBP. If we'd like to see the prices in different currency, we have to follow the steps below.
 
+I have implemented this in two different ways:
+A) Simple Approach
+B) Detailed Approach
+
+#### A) Simple Way
+Just pass the 3 letter currency code (ie. ISO 4217 code) with your request. See [sample input with currency data](./sample_input(currency).json) to get you started.
+
+You will see that ```order_total``` and ```vat_total``` will be calculated in the foreign currency. (Not the product prices and VAT)
+
+#### A) Detailed Way
+If you'd like to see the original prices alongside the currency converted you can go with this approach.
+
 For this use case, you will need to make the request from the shell.
 First run:
 ```
 python manage.py shell
 ```
 
-After the shell loads, we will need to input an order ID and user's native currency (3 letter code, eg: ISO 4217 code) in the payload to make this API work.
+After the shell loads, we will need to input an order ID and user's native currency (3 letter code, ie: ISO 4217 code) in the payload to make this API work.
 
 ```
 import requests
