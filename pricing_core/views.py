@@ -4,7 +4,7 @@ from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from pricing_core.models import Order
+from pricing_core.models import Order, ItemQuantity
 from .serializers import OrderSerializer
 
 

@@ -94,10 +94,10 @@ Nevertheless, to architect for a systematic growth,  I could have looked at vers
 Plus, I could have made a better documentation.
 
 #### What bits did you find the toughest? What bit are you most proud of? In both cases, why?
-I found the testing part to be the toughest since I hadn't done API testing extensively before. I'm proud many things, the project setup, use of Django REST Framework.
+I found the testing part to be the toughest. I hadn't done API testing extensively before. I also struggled bit on serializing M2M filed with a though table. Good to be learning new things. Besides, I'm proud many bits: the project setup, use of Django REST Framework etc.
 
 #### What one thing could we do to improve this test?
-You might ask the user to implement (or just propose to implement) an unspecified, creative feature that they think might would make sense. In this case, I would have suggested that: for example authentication might a such a feature.
+You might ask the user to implement (or just ask to propose to implement) an unspecified, creative feature that they think might would make sense. In this case, I would have suggested that: for example API authentication might a such a feature.
 
 ## Author
 
