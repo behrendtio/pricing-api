@@ -27,8 +27,6 @@ class ItemQuantitySerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     items = ItemQuantitySerializer(source="itemquantity_set", many=True, read_only=True)
 
-    currency = serializers.ReadOnlyField(allow_null=True)
-
     class Meta:
         fields = ('id', 'customer', 'items', 'order_total', 'vat_total', 'currency')
         model = models.Order
