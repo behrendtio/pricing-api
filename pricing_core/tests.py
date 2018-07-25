@@ -1,13 +1,22 @@
 import json
 import pytest
+from rest_framework.test import RequestsClient
 
 from pricing_core.models import Order
+
+@pytest.mark.django_db(transaction=False)
+def test_requests():
+    client = RequestsClient()
+    response = client.get('http://127.0.0.1:9000/api/orders/')
+    assert response.status_code == 200
 
 
 @pytest.mark.django_db(transaction=False)
 def test_the_endpoint_creates_order(client, django_user_model):
     assert Order.objects.exists() is False
-    client, _ = get_logged_in_client(client, django_user_model)
+    client = RequestsClient()
+
+    #client, _ = get_logged_in_client(client, django_user_model)
     headers = {'content-type': 'application/json'}
     payload = {'customer': 3, 'items': [{'id': 3, 'quantity': 1}, {'id': 4, 'quantity': 2}]}
 
