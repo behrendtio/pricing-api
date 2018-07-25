@@ -31,7 +31,6 @@ class Product(BaseModel):
             return 0
         else:
             return round(self.price * 0.2)
-        # per country
 
     def __str__(self):
         return self.name
