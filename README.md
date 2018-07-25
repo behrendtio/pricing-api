@@ -96,7 +96,8 @@ r.json()
 
 ## References (Built With)
 
-* [Django](https://www.djangoproject.com) - The framework
+* [Django 2.0.7](https://www.djangoproject.com)
+* [Django REST Framework 3.8.2](https://www.django-rest-framework.org)
 
 
 
